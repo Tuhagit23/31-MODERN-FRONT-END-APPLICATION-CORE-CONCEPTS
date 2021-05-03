@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template, Dynamically Create HTML </title>
+
+    <style>
+        .user{
+            background-color: lightsalmon;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 5px 5px 10px gray;
+        }
+        .user:hover{
+          /*   margin: 20px;
+            padding: 30px; */
+            cursor: pointer;
+            background-color: rgb(102, 247, 109);
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="user-container">         
+        <a href=""></a>
+    </div>
+
+
+    <script>
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(data=> showUserNames(data))
+
+        function showUserNames(data){
+            let userHTML = '';
+            data.forEach(user => {
+                userHTML = userHTML + `<div class="user"> 
+                    <h2>${user.name}</h2>
+                    <h3>Email : ${user.email} </h3>
+                    <h4> ${user.company.bs} : ${user.company.catchPhrase} :  ${user.company.bs}</h4>
+                    <b><a href="">${user.website}</a></b>
+                    </div>`
+            });
+            const userContainer = document.getElementById('user-container');
+            userContainer.innerHTML = userHTML;
+        }
+
+
+    </script>
+
+</body>
+</html>
